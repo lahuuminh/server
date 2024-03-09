@@ -15,11 +15,16 @@ CREATE TABLE hoadon(
     user_id int,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+create table theloai(
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     ten VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+     mota VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+);
 create table sanpham(
     masanpham INT AUTO_INCREMENT PRIMARY KEY,
     gia double,
     soluong int,
-    int theloai,
+    theloai int,
     FOREIGN KEY (theloai) REFERENCES theloai(id),
     ten varchar(255)   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 );
@@ -34,11 +39,6 @@ CREATE table chitiethoadon(
 create table hinhanh(
     anh_id INT AUTO_INCREMENT PRIMARY KEY,
     url varchar(255),
-    int masanpham,
+    masanpham int,
      FOREIGN KEY (masanpham) REFERENCES sanpham(masanpham)
-);
-create table theloai(
-     id INT AUTO_INCREMENT PRIMARY KEY,
-     ten VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-     mota VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 );
