@@ -9,7 +9,7 @@ CREATE TABLE USERS(
 );
 CREATE TABLE hoadon(
      mahoadon INT AUTO_INCREMENT PRIMARY KEY,
-    trangthaihoadon ENUM('Wating','Da Giao Hang','Da Huy') default 'ating',
+    trangthaihoadon ENUM('Wating','Da Giao Hang','Da Huy') default 'Wating',
     ngaymua date ,
     tongtien double,
     user_id int,
