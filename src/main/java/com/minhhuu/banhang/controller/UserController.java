@@ -1,5 +1,6 @@
 package com.minhhuu.banhang.controller;
 
+import com.minhhuu.banhang.model.LoginRequest;
 import com.minhhuu.banhang.model.Message;
 import com.minhhuu.banhang.model.Test;
 import com.minhhuu.banhang.model.User;
@@ -22,11 +23,22 @@ public class UserController {
            List<User>u=userRepo.findAll();
            return new ResponseEntity<>(u,HttpStatus.OK);
     }
-
-   @PostMapping()
+    @PostMapping("/login")
+    public  ResponseEntity<User> login(@RequestBody LoginRequest loginRequest){
+        System.out.println(loginRequest.getAccountname());
+        User u= userRepo.findName(loginRequest.getAccountname());
+        System.out.println(u);
+        return new ResponseEntity<>(u,HttpStatus.OK);
+    }
+   @PostMapping("")
    public ResponseEntity<Message> save(@RequestBody User u){
-        userRepo.save(u);
-          return  new ResponseEntity<>(new Message("thêm thành công"),HttpStatus.CREATED);
+
+        if(userRepo.findByName(u.getAccountname())){
+            return  new ResponseEntity<>(new Message("username đã tồn tại"),HttpStatus.OK);
+        }else{
+            userRepo.save(u);
+            return  new ResponseEntity<>(new Message("thêm thành công"),HttpStatus.CREATED);
+        }
    }
    @DeleteMapping("/{id}")
    public  ResponseEntity<Message> delete(@PathVariable Long id){

@@ -54,6 +54,32 @@ public class UserRepo {
             return u;
         });
     }
+    public  boolean findByName(String username){
+        if (username == null) {
+            return false; // Trả về false nếu username là null
+        }
+
+        String sql = "SELECT count(*) FROM users WHERE accountname = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class,username);
+        System.out.println(count);
+        return count != null && count > 0;
+    }
+    public  User findName(String accountname){
+     System.out.println(1);
+        String sql = "SELECT * FROM users WHERE accountname= ?";
+      return   jdbcTemplate.queryForObject(sql,new Object[]{accountname},(rs, rowNum) -> {
+            User u=new User();
+            u.setUser_id(rs.getInt(1));
+            u.setEmail(rs.getString(2));
+            u.setUsername(rs.getString(3));
+            u.setStatus(rs.getString(4));
+            u.setPassword(rs.getString(5));
+            u.setPhone(rs.getString(6));
+            u.setRole(rs.getString(7));
+            u.setAccountname(rs.getString(8));
+            return u;
+        });
+    }
 
     public void update(User user) {
         System.out.println(user);

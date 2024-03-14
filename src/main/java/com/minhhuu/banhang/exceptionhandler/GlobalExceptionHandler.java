@@ -16,6 +16,6 @@ public class GlobalExceptionHandler {
    @ExceptionHandler(Exception.class)
    public ResponseEntity<String> handleGenericException(Exception e) {
        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-               .body("Đã xảy ra lỗi không xác định. Vui lòng thử lại sau.");
+               .body(e.getMessage());
    }
 }
