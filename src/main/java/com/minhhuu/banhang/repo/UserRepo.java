@@ -34,6 +34,7 @@ public class UserRepo {
                 u.setPhone(rs.getString(6));
                 u.setRole(rs.getString(7));
                 u.setAccountname(rs.getString(8));
+                u.setAddress(rs.getString(9));
                 return u;
             }
         });
@@ -51,6 +52,7 @@ public class UserRepo {
             u.setPhone(rs.getString(6));
             u.setRole(rs.getString(7));
             u.setAccountname(rs.getString(8));
+            u.setAddress(rs.getString(9));
             return u;
         });
     }
@@ -77,13 +79,15 @@ public class UserRepo {
             u.setPhone(rs.getString(6));
             u.setRole(rs.getString(7));
             u.setAccountname(rs.getString(8));
+            u.setAddress(rs.getString(9));
             return u;
         });
     }
 
     public void update(User user) {
+
         System.out.println(user);
-        String sql = "UPDATE users SET email=?,username=?,status=?,password=?,phone=?,accountname=?WHERE user_id =?";
+        String sql = "UPDATE users SET email=?,username=?,status=?,password=?,phone=?,accountname=? WHERE user_id =?";
        int row= jdbcTemplate.update(sql,user.getEmail(),user.getUsername(),user.getStatus(),user.getPassword(),user.getPhone(),user.getAccountname(),user.getUser_id());
        System.out.println(row);
         if(row==0){

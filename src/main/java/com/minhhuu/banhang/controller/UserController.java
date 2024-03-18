@@ -24,17 +24,18 @@ public class UserController {
            return new ResponseEntity<>(u,HttpStatus.OK);
     }
     @PostMapping("/login")
-    public  ResponseEntity<User> login(@RequestBody LoginRequest loginRequest){
+    public  ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
         System.out.println(loginRequest.getAccountname());
         User u= userRepo.findName(loginRequest.getAccountname());
-        System.out.println(u);
+       if(u==null){
+           return new ResponseEntity<>(new Message("User not found"),HttpStatus.NOT_FOUND);
+       }
         return new ResponseEntity<>(u,HttpStatus.OK);
     }
    @PostMapping("")
    public ResponseEntity<Message> save(@RequestBody User u){
-
         if(userRepo.findByName(u.getAccountname())){
-            return  new ResponseEntity<>(new Message("username đã tồn tại"),HttpStatus.OK);
+            return  new ResponseEntity<>(new Message("username đã tồn tại"),HttpStatus.BAD_REQUEST);
         }else{
             userRepo.save(u);
             return  new ResponseEntity<>(new Message("thêm thành công"),HttpStatus.CREATED);
@@ -48,8 +49,10 @@ public class UserController {
     }
     @PutMapping()
     public ResponseEntity<Message> update(@RequestBody User u ){
-                userRepo.update(u);
-                return  new ResponseEntity<>(new Message("sửa thành công"),HttpStatus.OK);
+
+            userRepo.update(u);
+            return  new ResponseEntity<>(new Message("sửa thành công"),HttpStatus.ACCEPTED);
+
     }
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id){

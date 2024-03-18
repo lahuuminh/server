@@ -1,5 +1,6 @@
 package com.minhhuu.banhang.exceptionhandler;
 
+import com.minhhuu.banhang.model.Message;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(EmptyResultDataAccessException.class)
-    public ResponseEntity<String> handleEmptyResultDataAccessException(EmptyResultDataAccessException e) {
+    public ResponseEntity<Message> handleEmptyResultDataAccessException(EmptyResultDataAccessException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("Không tìm thấy dữ liệu.");
+                .body(new Message("Không tìm thấy dữ liệu."));
     }
    @ExceptionHandler(Exception.class)
-   public ResponseEntity<String> handleGenericException(Exception e) {
+   public ResponseEntity<Message> handleGenericException(Exception e) {
        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-               .body(e.getMessage());
+               .body(new Message(e.getMessage()));
    }
 }
