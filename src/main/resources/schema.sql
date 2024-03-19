@@ -165,5 +165,54 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+DROP TABLE IF EXISTS `phieunhap`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `phieunhap` (
+  `Maphieunhap` varchar(50) NOT NULL,
+  `Trangthai` enum('Wating','Da Giao Hang','Da Huy') DEFAULT 'Wating',
+  `Ngaynhap` date DEFAULT NULL,
+  `Tongtiennhap` double DEFAULT NULL,
+  `Manhacungcap` int DEFAULT NULL,
+  PRIMARY KEY (`Maphieunhap`),
+  KEY `Manhacungcap` (`Manhacungcap `),
+  CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`Manhacungcap`) REFERENCES `nhacungcap` (`Manhacungcap`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `hoadon`
+--
+
+LOCK TABLES `phieunhap` WRITE;
+
+INSERT INTO `phieunhap` VALUES ('')
+
+UNLOCK TABLES;
+
+
+DROP TABLE IF EXISTS `chitietphieunhap`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `chitiethoadon` (
+  `Maphieunhap` varchar(50) DEFAULT NULL,
+  `masanpham` int DEFAULT NULL,
+  `gia` double DEFAULT NULL,
+  `soluong` int DEFAULT NULL,
+  KEY `masanpham` (`masanpham`),
+  KEY `mahoadon` (`mahoadon`),
+  CONSTRAINT `chitietphieunhap_ibfk_2` FOREIGN KEY (`masanpham`) REFERENCES `sanpham` (`masanpham`),
+  CONSTRAINT `chitietphieunhap_ibfk_3` FOREIGN KEY (`maphieunhap`) REFERENCES `phieunhap` (`maphieunhap`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+LOCK TABLES `chitietphieunhap` WRITE;
+/*!40000 ALTER TABLE `chitiethoadon` DISABLE KEYS */;
+INSERT INTO `chitietphieunhap` VALUES ('WB10-255316874',1,40000,1),('WB10-255316874',3,160000,3),('WB10-255316874',2,160000,2),('WB10-255922264',9,200000,2),('WB10-255922264',3,160000,2);
+/*!40000 ALTER TABLE `chitiethoadon` ENABLE KEYS */;
+UNLOCK TABLES;
 -- Dump completed on 2024-03-10 14:53:24
