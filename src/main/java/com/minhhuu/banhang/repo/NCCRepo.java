@@ -35,5 +35,9 @@ public class NhaCungCapRepo {
     public void delete(int id) {
         String sql = "DELETE FROM nhacungcap WHERE id = ?";
         jdbcTemplate.update(sql, id);
+        public List<NhaCungCap> sortByTenNhaCungCap() {
+    String sql = "SELECT * FROM nhacungcap ORDER BY ten_nha_cung_cap ASC";
+    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(NhaCungCap.class));
+}
     }
 }
