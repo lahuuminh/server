@@ -216,3 +216,18 @@ INSERT INTO `chitietphieunhap` VALUES ('WB10-255316874',1,40000,1),('WB10-255316
 /*!40000 ALTER TABLE `chitiethoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 -- Dump completed on 2024-03-10 14:53:24
+-- Tạo bảng nhacungcap
+CREATE TABLE `nhacungcap` (
+  `Manhacungcap` int NOT NULL AUTO_INCREMENT,
+  `tennhacungcap` varchar(255) DEFAULT NULL,
+  `diachi` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Manhacungcap`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Thêm dữ liệu mẫu vào bảng nhacungcap
+INSERT INTO `nhacungcap` (`tennhacungcap`, `diachi`) VALUES
+('Nhà cung cấp A', 'Địa chỉ A'),
+('Nhà cung cấp B', 'Địa chỉ B'),
+('Nhà cung cấp C', 'Địa chỉ C');
+  CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`Manhacungcap`) REFERENCES `nhacungcap` (`Manhacungcap`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
