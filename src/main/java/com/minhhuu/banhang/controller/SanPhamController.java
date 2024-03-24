@@ -52,5 +52,13 @@ public class SanPhamController {
         } else {
             return new ResponseEntity<>(new Message("Xóa sản phẩm thất bại"), HttpStatus.BAD_REQUEST);
         }
-    }
+//Sap xep san pham
+   public ResponseEntity<List<sanpham>> sortByProductName() {
+    List<sanpham> sortedProducts = productRepo.sortByProductName();
+    return new ResponseEntity<>(sortedProducts, HttpStatus.OK);
 }
+    }
+
+
+}
+
