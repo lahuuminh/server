@@ -53,5 +53,9 @@ public class NhaCungCapController {
         } else {
             return new ResponseEntity<>(new Message("Xóa nhà cung cấp thất bại"), HttpStatus.BAD_REQUEST);
         }
+public ResponseEntity<List<NhaCungCap>> sortByTenNhaCungCap() {
+    List<NhaCungCap> sortedNhaCungCap = nhaCungCapRepo.sortByTenNhaCungCap();
+    return new ResponseEntity<>(sortedNhaCungCap, HttpStatus.OK);
+}
     }
 }
