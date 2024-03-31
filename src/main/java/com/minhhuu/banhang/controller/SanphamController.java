@@ -1,6 +1,6 @@
 package com.minhhuu.banhang.controller;
 
-import model.Sanpham;
+import com.minhhuu.banhang.model.Sanpham;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
