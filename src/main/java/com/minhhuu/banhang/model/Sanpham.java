@@ -1,4 +1,4 @@
-package model;
+package com.minhhuu.banhang.model;
 
 public class Sanpham {
     private int masanpham;
