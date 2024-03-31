@@ -1,6 +1,7 @@
-package controller;
+package com.minhhuu.banhang.controller;
 
-import model.Nhacungcap;
+import com.minhhuu.banhang.model.Nhacungcap;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
