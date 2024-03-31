@@ -1,4 +1,4 @@
-package model;
+package com.minhhuu.banhang.model;
 
 public class Nhacungcap {
     private String mancc;
