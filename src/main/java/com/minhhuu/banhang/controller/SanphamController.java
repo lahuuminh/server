@@ -1,4 +1,4 @@
-package controller;
+package com.minhhuu.banhang.controller;
 
 import model.Sanpham;
 
