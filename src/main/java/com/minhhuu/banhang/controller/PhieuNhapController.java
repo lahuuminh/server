@@ -105,7 +105,7 @@ public class Main {
 
         try {
             databaseManager.connect();
-            
+
             // Lập phiếu nhập và nhập hàng vào kho
             phieunhap phieuNhap = new phieunhap("PN001", new Date(), 1000.0, "NCC001", "Mới");
             databaseManager.insertPhieuNhap(phieuNhap);
@@ -123,7 +123,7 @@ public class Main {
             for (Map.Entry<String, Double> entry : salesReport.entrySet()) {
                 System.out.println("Nhà cung cấp: " + entry.getKey() + ", Tổng tiền nhập hàng: " + entry.getValue());
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

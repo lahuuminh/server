@@ -10,6 +10,13 @@ public class hinhanh {
         return url;
     }
 
+    @Override
+    public String toString() {
+        return "hinhanh{" +
+                "url='" + url + '\'' +
+                '}';
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }

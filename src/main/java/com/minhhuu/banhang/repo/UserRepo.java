@@ -87,8 +87,8 @@ public class UserRepo {
     public void update(User user) {
 
         System.out.println(user);
-        String sql = "UPDATE users SET email=?,username=?,status=?,password=?,phone=?,accountname=? WHERE user_id =?";
-       int row= jdbcTemplate.update(sql,user.getEmail(),user.getUsername(),user.getStatus(),user.getPassword(),user.getPhone(),user.getAccountname(),user.getUser_id());
+        String sql = "UPDATE users SET email=?,username=?,status=?,password=?,phone=?,accountname=?,role=?,address=? WHERE user_id =?";
+       int row= jdbcTemplate.update(sql,user.getEmail(),user.getUsername(),user.getStatus(),user.getPassword(),user.getPhone(),user.getAccountname(),user.getRole(),user.getAddress(),user.getUser_id());
        System.out.println(row);
         if(row==0){
             throw new EmptyResultDataAccessException("Không tìm thấy bản ghi với ID: " + user.getUser_id(), 1);

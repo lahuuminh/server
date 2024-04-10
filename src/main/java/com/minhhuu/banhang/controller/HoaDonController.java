@@ -1,16 +1,17 @@
 package com.minhhuu.banhang.controller;
 
-import com.minhhuu.banhang.model.Message;
-import com.minhhuu.banhang.model.chitiethoadon;
-import com.minhhuu.banhang.model.hoadon;
+import com.minhhuu.banhang.model.*;
+import com.minhhuu.banhang.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -20,6 +21,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HoaDonController {
     @Autowired
    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private UserRepo userRepo;
     @PostMapping("/add")
     public void addhoadon(@RequestBody hoadon hoadon) {
         System.out.println(hoadon.toString());
@@ -27,6 +30,44 @@ public class HoaDonController {
     int row=  jdbcTemplate.update(sql, hoadon.getMahoadon(), hoadon.getTrangthaihoadon(), hoadon.getNgaymua(), hoadon.getTongtien(), hoadon.getUser_id());
     System.out.println(row);
 
+    }
+    @GetMapping("/find/{id}")
+    public HoaDonResponse findHoaDonResponse(@PathVariable String id){
+        String sqltest = "select * from  hoadon where mahoadon=?";
+       hoadon a= jdbcTemplate.queryForObject(sqltest, new Object[]{id},new RowMapper<hoadon>() {
+            @Override
+            public hoadon mapRow(ResultSet rs, int rowNum) throws SQLException {
+                hoadon h=new hoadon();
+                h.setMahoadon(rs.getString(1));
+                h.setTrangthaihoadon(rs.getString(2));
+                h.setNgaymua(rs.getDate(3));
+                h.setTongtien(rs.getDouble(4));
+                h.setUser_id(rs.getInt(5));
+                return h;
+            }
+        });
+        String sql1 = "SELECT * FROM chitiethoadon where mahoadon=?";
+       List<chitiethoadon>l=jdbcTemplate.query(sql1, new Object[]{id}, new RowMapper<chitiethoadon>() {
+           @Override
+           public chitiethoadon mapRow(ResultSet rs, int rowNum) throws SQLException {
+               chitiethoadon c=new chitiethoadon();
+               c.setMahoadon(rs.getString(1));
+               c.setMasanpham(rs.getInt(2));
+               c.setGia(rs.getDouble(3));
+               c.setSoluong(rs.getInt(4));
+               return c;
+           }
+       });
+       User u=userRepo.findById((long) a.getUser_id());
+       HoaDonResponse hoaDonResponse=new HoaDonResponse();
+       hoaDonResponse.setMahoadon(a.getMahoadon());
+       hoaDonResponse.setNgaymua(a.getNgaymua());
+       hoaDonResponse.setTongtien(a.getTongtien());
+       hoaDonResponse.setTrangthaihoadon(a.getTrangthaihoadon());
+       hoaDonResponse.setUser_id(a.getUser_id());
+       hoaDonResponse.setChitiethoadonList(l);
+       hoaDonResponse.setU(u);
+       return hoaDonResponse;
     }
     public  boolean check(List<chitiethoadon>l){
         String sql3="select soluong from sanpham where masanpham=?";

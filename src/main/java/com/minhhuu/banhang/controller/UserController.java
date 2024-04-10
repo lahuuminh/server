@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = {"http://127.0.0.1:5503"})
+
 public class UserController {
     @Autowired
     private UserRepo userRepo;

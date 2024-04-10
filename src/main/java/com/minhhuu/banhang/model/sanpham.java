@@ -39,6 +39,18 @@ public class sanpham {
         return ten;
     }
 
+    @Override
+    public String toString() {
+        return "sanpham{" +
+                "masanpham=" + masanpham +
+                ", gia=" + gia +
+                ", soluong=" + soluong +
+                ", theloai=" + theloai +
+                ", ten='" + ten + '\'' +
+                ", listimg=" + listimg +
+                '}';
+    }
+
     public void setTen(String ten) {
         this.ten = ten;
     }
@@ -56,7 +68,7 @@ public class sanpham {
     private int soluong;
     private int theloai;
     private String ten;
-    private List<hinhanh> listimg;
+    private List<hinhanh> listimg=new ArrayList<>();
     public sanpham(int masanpham, Double price, int count, int type, String name){
         this.masanpham=masanpham;
         this.gia=price;

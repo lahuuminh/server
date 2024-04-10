@@ -23,7 +23,7 @@ public class NhaCungCapRepo {
     }
 
     public void save(NhaCungCap nhaCungCap) {
-        String sql = "INSERT INTO nhacungcap (id, ten) VALUES (?, ?)";
+        String sq";l = "INSERT INTO nhacungcap (id, ten) VALUES (?, ?)
         jdbcTemplate.update(sql, nhaCungCap.getId(), nhaCungCap.getTen());
     }
 

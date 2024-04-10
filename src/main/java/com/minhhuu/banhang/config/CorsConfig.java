@@ -8,9 +8,6 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*") // Chấp nhận yêu cầu từ tất cả các nguồn
-                .allowedMethods("*") // Chấp nhận tất cả các phương thức HTTP (GET, POST, PUT, DELETE, v.v.)
-                .allowedHeaders("*"); // Chấp nhận tất cả các tiêu đề
+        registry.addMapping("/**").allowedMethods("*");
     }
 }
