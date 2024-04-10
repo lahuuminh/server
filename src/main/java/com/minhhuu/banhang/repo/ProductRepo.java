@@ -220,18 +220,17 @@ public void create(sanpham sp) throws SQLException {
 }
 
 
-    public List<sanpham> timKiemSanPhamByFieldAndOrder(String ten, String loai, Double giaMin, Double giaMax) {
+    public List<sanpham> timKiemSanPhamByFieldAndOrder(String ten, Integer loai, Double giaMin, Double giaMax) throws SQLException {
+
         // Chuẩn bị câu lệnh SQL
         String sql = "SELECT * FROM sanpham WHERE ";
-        if (ten!=null&&!ten.isBlank()) {
+        if (!ten.isEmpty()) {
             sql += "ten LIKE ? AND ";
         }
-        boolean b = loai != null && !loai.isBlank() && !loai.equals("0");
-        if (b) {
-                sql += "theloai = ? AND ";
+        if (loai != 0) {
+            sql += "theloai = ? AND ";
         }
-        if (giaMin != 0.0 && giaMax != 0.0) {
-
+        if (giaMin != 0 && giaMax != 0) {
             sql += "gia BETWEEN ? AND ? ";
         }
 
@@ -242,12 +241,13 @@ public void create(sanpham sp) throws SQLException {
 
         // Chuẩn bị tham số
         List<Object>params=new ArrayList<>();
-        if (ten!=null&&!ten.isBlank()) {
+        if (!ten.isEmpty()) {
 //            o[0]="%" + ten+ "%";
             params.add("%" + ten+ "%");
         }
-        if (b) {
+        if (loai != 0) {
             params.add(loai);
+
         }
         if (giaMin != 0 && giaMax != 0) {
 //            o[2]=giaMin;
@@ -259,33 +259,18 @@ public void create(sanpham sp) throws SQLException {
         // Truy vấn dữ liệu
         Object o[]=   params.toArray();
         System.out.println(o);
-        System.out.println(sql);
-        String sql1="select * from hinhanh where anh_id=?";
         List<sanpham> sanPhams =jdbcTemplate.query(sql,o, new RowMapper<sanpham>() {
             @Override
             public sanpham mapRow(ResultSet rs, int rowNum) throws SQLException {
-
                 sanpham s=new sanpham();
                 s.setMasanpham(rs.getInt("masanpham"));
-                System.out.println(rs.getInt("masanpham"));
-                List<hinhanh>l=new ArrayList<>();
-                String sql1="select * from hinhanh where masanpham=?";
-                PreparedStatement preparedStatement=connection.prepareStatement(sql1);
-                ResultSet resultSet= preparedStatement.executeQuery();
-                while (resultSet.next()){
-                    hinhanh a=new hinhanh();
-                    a.setUrl(resultSet.getString("url"));
-                    l.add(a);
-                }
                 s.setGia(rs.getDouble("gia"));
                 s.setTen(rs.getString("ten"));
                 s.setSoluong(rs.getInt("soluong"));
                 s.setTheloai(rs.getInt("theloai"));
-                s.setListimg(l);
                 return s;
             }
         });
-
         return sanPhams;
     }
 

@@ -130,7 +130,7 @@ public class NhaCungCapRepo {
 
         // Truy vấn dữ liệu
         Object o[]=   params.toArray();
-        System.out.println(o);
+        System.out.println(o.length);
         System.out.println(sql);
         List<NCC> sanPhams =jdbcTemplate.query(sql,o, new RowMapper<NCC>() {
             @Override

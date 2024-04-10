@@ -54,10 +54,8 @@ public class ProductController {
             @RequestParam(value = "ten", required = false) String tenSanPham,
             @RequestParam(value = "giamin", required = false,defaultValue ="1.0") Double giaMin ,
             @RequestParam(value = "giamax", required = false,defaultValue ="1000000.0") Double giaMax,
-            @RequestParam(value = "loai", required = false) String loaiSanPham
-         )
-
-    {
+            @RequestParam(value = "loai", required = false,defaultValue = "0") Integer loaiSanPham
+         ) throws SQLException {
         System.out.println(tenSanPham);
         System.out.println(giaMin);  System.out.println(giaMax);
         System.out.println(loaiSanPham);

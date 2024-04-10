@@ -1,18 +1,25 @@
 package com.minhhuu.banhang.model;
 
-public class Sanpham {
+import java.util.ArrayList;
+import java.util.List;
+
+public class sanpham {
     private int masanpham;
     private double gia;
     private int soluong;
-    private String theloai;
+    private int  theloai;
     private String ten;
 
-    public Sanpham(int masanpham, double gia, int soluong, String theloai, String ten) {
-        this.masanpham = masanpham;
-        this.gia = gia;
-        this.soluong = soluong;
-        this.theloai = theloai;
-        this.ten = ten;
+    @Override
+    public String toString() {
+        return "sanpham{" +
+                "masanpham=" + masanpham +
+                ", gia=" + gia +
+                ", soluong=" + soluong +
+                ", theloai='" + theloai + '\'' +
+                ", ten='" + ten + '\'' +
+                ", listimg=" + listimg +
+                '}';
     }
 
     public int getMasanpham() {
@@ -39,13 +46,9 @@ public class Sanpham {
         this.soluong = soluong;
     }
 
-    public String getTheloai() {
-        return theloai;
-    }
 
-    public void setTheloai(String theloai) {
-        this.theloai = theloai;
-    }
+
+
 
     public String getTen() {
         return ten;
@@ -55,14 +58,47 @@ public class Sanpham {
         this.ten = ten;
     }
 
-    @Override
-    public String toString() {
-        return "Sanpham{" +
-                "masanpham=" + masanpham +
-                ", gia=" + gia +
-                ", soluong=" + soluong +
-                ", theloai='" + theloai + '\'' +
-                ", ten='" + ten + '\'' +
-                '}';
+    public List<hinhanh> getListimg() {
+        return listimg;
     }
+
+    public void setListimg(List<hinhanh> listimg) {
+        this.listimg = listimg;
+    }
+
+    public sanpham(int masanpham, double gia, int soluong, int theloai, String ten) {
+        this.masanpham = masanpham;
+        this.gia = gia;
+        this.soluong = soluong;
+        this.theloai = theloai;
+        this.ten = ten;
+    }
+
+    public sanpham() {
+    }
+
+    public sanpham(int masanpham, double gia, int soluong, int theloai, String ten, List<hinhanh> listimg) {
+        this.masanpham = masanpham;
+        this.gia = gia;
+        this.soluong = soluong;
+        this.theloai = theloai;
+        this.ten = ten;
+        this.listimg = listimg;
+    }
+
+    public int getTheloai() {
+        return theloai;
+    }
+
+    public void setTheloai(int theloai) {
+        this.theloai = theloai;
+    }
+
+    private List<hinhanh>listimg=new ArrayList<>();
+
+
+    public void addImage(hinhanh a){
+        listimg.add(a);
+    }
+
 }
