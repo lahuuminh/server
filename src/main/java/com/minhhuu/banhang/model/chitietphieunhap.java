@@ -1,54 +1,60 @@
 package com.minhhuu.banhang.model;
 
 public class chitietphieunhap {
-        String Maphieunhap;
+        String maphieunhap;
         int masanpham;
         Double gia;
         int soluong;
 
-    public chitietphieunhap(String Maphieunhap, int masanpham, Double gia, int soluong){
-        this.Maphieunhap = Maphieunhap;
+    public chitietphieunhap() {
+    }
+
+    public chitietphieunhap(String maphieunhap, int masanpham, Double gia, int soluong) {
+        this.maphieunhap = maphieunhap;
         this.masanpham = masanpham;
         this.gia = gia;
         this.soluong = soluong;
     }
-    public chitietphieunhap() {
 
+    @Override
+    public String toString() {
+        return "chitietphieunhap{" +
+                "maphieunhap='" + maphieunhap + '\'' +
+                ", masanpham=" + masanpham +
+                ", gia=" + gia +
+                ", soluong=" + soluong +
+                '}';
     }
+
     public String getMaphieunhap() {
-        return Maphieunhap;
+        return maphieunhap;
     }
 
-    public int getmasanpham() {
+    public void setMaphieunhap(String maphieunhap) {
+        this.maphieunhap = maphieunhap;
+    }
+
+    public int getMasanpham() {
         return masanpham;
     }
 
-    public Double gia() {
-        return gia;
-    }
-    public int soluong() {
-        return soluong;
-    }
-    public void setMaphieunhap(String Maphieunhap){
-        this.Maphieunhap = Maphieunhap;
-    }
-
-    public void setmasanpham(int masanpham) {
+    public void setMasanpham(int masanpham) {
         this.masanpham = masanpham;
     }
-    public void setgia(Double gia) {
+
+    public Double getGia() {
+        return gia;
+    }
+
+    public void setGia(Double gia) {
         this.gia = gia;
     }
-    public void setSoluong(int soluong){
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
-    @Override
-    public String toString() {
-        return "hoadon{" +
-                "maphieunhap='" + Maphieunhap + '\'' +
-                ", ngaynhap='" + masanpham + '\'' +
-                ", tongtiennhap=" + gia +
-                ", manhacungcap=" + soluong +
-                '}';
-    }
-    }   
+}
