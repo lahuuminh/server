@@ -1,4 +1,4 @@
--Đăng kí,đăng nhập
+- Đăng kí,đăng nhập
 - Xem được thông tin hàng hoá, số lượng.
 - Tìm kiếm dữ liệu hàng hoá.
 - Lọc được theo giá bán, tên sản phẩm.
