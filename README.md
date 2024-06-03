@@ -13,4 +13,3 @@ phải giảm.
 - Thêm, sửa, xoá nhà cung cấp.
 - Tìm kiếm, sắp xếp theo sản phẩm, theo nhà cung cấp.
 - Lập phiếu nhập kho, nhập hàng vào doanh nghiệp
-
