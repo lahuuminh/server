@@ -13,3 +13,4 @@ phải giảm.
 - Thêm, sửa, xoá nhà cung cấp.
 - Tìm kiếm, sắp xếp theo sản phẩm, theo nhà cung cấp.
 - Lập phiếu nhập kho, nhập hàng vào doanh nghiệp
+- Phân quyền người dùng: người mua hàng,người bán hàng ,người quản lý kho,người quản lý (có tất cả quyền )
