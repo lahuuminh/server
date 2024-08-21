@@ -3,46 +3,31 @@ import com.minhhuu.banhang.model.Message;
 import com.minhhuu.banhang.model.PNReport;
 import com.minhhuu.banhang.model.phieunhap;
 import com.minhhuu.banhang.model.BHReport;
+import com.minhhuu.banhang.util.ConnectDB;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 @RestController
 @RequestMapping("/phieunhap")
 public class PhieuNhapController {
     private Connection connection;
-    private final String url="jdbc:mysql://localhost:3306/banhang";
-    private final String username="root";
-    private final String password="minhmankieu456";
 
 
 
     public PhieuNhapController() throws SQLException {
-        connect();
+        connection= ConnectDB.con();
     }
 
-    public void connect() throws SQLException {
-        connection = DriverManager.getConnection(url, username, password);
-        System.out.println("Connected to database successfully.");
-    }
 
-    public void disconnect() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            connection.close();
-            System.out.println("Disconnected from database.");
-        }
-    }
     public int checkall(phieunhap a) throws SQLException {
         String sql="select * from sanpham where ten like ?";
         PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -181,40 +166,4 @@ public class PhieuNhapController {
 }
 
 
-//public class Main {
-//    public static void main(String[] args) {
-//        PhieuNhapController databaseManager = new PhieuNhapController("jdbc:mysql://localhost:3306/your_database", "username", "password");
-//
-//        try {
-//            databaseManager.connect();
-//
-//            // Lập phiếu nhập và nhập hàng vào kho
-//            phieunhap phieuNhap = new phieunhap("PN001", new Date(), 1000.0, "NCC001", "Mới");
-//            databaseManager.insertPhieuNhap(phieuNhap);
-//
-//            // Xem và thống kê lịch sử nhập kho theo tháng và năm
-//            List<phieunhap> phieuNhapList = databaseManager.getPhieuNhapByMonthAndYear(3, 2024);
-//            System.out.println("Lịch sử nhập kho cho tháng 3 năm 2024:");
-//            for (phieunhap a : phieuNhapList) {
-//                System.out.println(a.toString());
-//            }
-//
-//            // Xem thống kê, báo cáo bán hàng cho tháng và năm
-//            Map<String, Double> salesReport = databaseManager.getSalesReportByMonthAndYear(3, 2024);
-//            System.out.println("Báo cáo bán hàng cho tháng 3 năm 2024:");
-//            for (Map.Entry<String, Double> entry : salesReport.entrySet()) {
-//                System.out.println("Nhà cung cấp: " + entry.getKey() + ", Tổng tiền nhập hàng: " + entry.getValue());
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                databaseManager.disconnect();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//}
 

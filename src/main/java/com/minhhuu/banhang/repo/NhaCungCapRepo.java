@@ -1,7 +1,7 @@
 package com.minhhuu.banhang.repo;
 
 import com.minhhuu.banhang.model.NCC;
-import com.minhhuu.banhang.model.sanpham;
+import com.minhhuu.banhang.util.ConnectDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,23 +10,19 @@ import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 @Component
 public class NhaCungCapRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
-    private  String connectionUrl="jdbc:mysql://localhost:3306/banhang";
-    private  String username="root";
-    private String password="minhmankieu456";
-    private Connection connection;
-    {
-        try {
-            connection = DriverManager.getConnection(connectionUrl, username, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+
+    public NhaCungCapRepo() {
+        connection= ConnectDB.con();
     }
+
+    private final Connection connection;
+
     public void update(NCC ncc) throws SQLException {
 
         System.out.println(ncc);

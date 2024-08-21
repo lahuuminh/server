@@ -1,33 +1,29 @@
 package com.minhhuu.banhang.repo;
 
+import com.minhhuu.banhang.util.ConnectDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import com.minhhuu.banhang.model.sanpham;
 import com.minhhuu.banhang.model.hinhanh;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class ProductRepo {
-    private  String connectionUrl="jdbc:mysql://localhost:3306/banhang";
-    private  String username="root";
-    private String password="minhmankieu456";
+
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
-private Connection connection;
-    {
-        try {
-            connection = DriverManager.getConnection(connectionUrl, username, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+private final Connection connection;
+
+    public ProductRepo() {
+        connection= ConnectDB.con();
     }
+
     public List<sanpham> findAll() {
         List<sanpham> list_product = new ArrayList<>();
         List<hinhanh> list_img = new ArrayList<>();
