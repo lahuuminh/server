@@ -12,14 +12,7 @@ data/mysql.sock
 .settings
 .springBeans
 .sts4-cache
-ca.pem
-ca-key.pem
-client-cert.pem
-client-key.pem
-private_key.pem
-public_key.pem
-server-cert.pem
-server-key.pem
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
