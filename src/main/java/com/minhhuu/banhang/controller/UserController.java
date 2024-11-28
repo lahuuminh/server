@@ -6,6 +6,7 @@ import com.minhhuu.banhang.model.Test;
 import com.minhhuu.banhang.model.User;
 import com.minhhuu.banhang.repo.TestRepo;
 import com.minhhuu.banhang.repo.UserRepo;
+import com.minhhuu.banhang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +18,15 @@ import java.util.List;
 
 public class UserController {
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
     @GetMapping("/all")
     public ResponseEntity<List<User>>getAll(){
-           List<User>u=userRepo.findAll();
+           List<User>u=userService.findAll();
            return new ResponseEntity<>(u,HttpStatus.OK);
     }
     @PostMapping("/login")
     public  ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
-        System.out.println(loginRequest.getAccountname());
-        User u= userRepo.findName(loginRequest.getAccountname());
+        User u= userService.findByAccountname(loginRequest.getAccountname());
        if(u==null){
            return new ResponseEntity<>(new Message("User not found"),HttpStatus.NOT_FOUND);
        }
@@ -34,29 +34,29 @@ public class UserController {
     }
    @PostMapping("")
    public ResponseEntity<Message> save(@RequestBody User u){
-        if(userRepo.findByName(u.getAccountname())){
+        if(userService.findByName(u.getAccountname())){
             return  new ResponseEntity<>(new Message("username đã tồn tại"),HttpStatus.BAD_REQUEST);
         }else{
-            userRepo.save(u);
+            userService.save(u);
             return  new ResponseEntity<>(new Message("thêm thành công"),HttpStatus.CREATED);
         }
    }
    @DeleteMapping("/{id}")
    public  ResponseEntity<Message> delete(@PathVariable Long id){
 
-           userRepo.deleteById(id);
+           userService.deleteById(id);
            return  new ResponseEntity<>(new Message("xóa thành công"),HttpStatus.OK);
     }
     @PutMapping()
     public ResponseEntity<Message> update(@RequestBody User u ){
 
-            userRepo.update(u);
+            userService.update(u);
             return  new ResponseEntity<>(new Message("sửa thành công"),HttpStatus.ACCEPTED);
 
     }
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id){
-            User u=userRepo.findById(id);
+            User u=userService.findById(id);
             return  new ResponseEntity<>(u,HttpStatus.OK);
     }
 }

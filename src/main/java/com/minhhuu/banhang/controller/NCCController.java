@@ -4,6 +4,7 @@ import com.minhhuu.banhang.model.Message;
 import com.minhhuu.banhang.model.NCC;
 import com.minhhuu.banhang.model.sanpham;
 import com.minhhuu.banhang.repo.NhaCungCapRepo;
+import com.minhhuu.banhang.service.NhaCungCapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,28 +18,28 @@ import java.util.List;
 @CrossOrigin
 public class NCCController {
     @Autowired
-   private NhaCungCapRepo nhaCungCapRepo;
+   private NhaCungCapService nhaCungCapService;
     @GetMapping("/all")
     public List<NCC>findAll() throws SQLException {
-        return nhaCungCapRepo.findAll();
+        return nhaCungCapService.findAll();
     }
     @GetMapping("/{id}")
     public  NCC findById(@PathVariable Long id) throws SQLException {
-       return nhaCungCapRepo.findById(id);
+       return nhaCungCapService.findById(id);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Message>delete(@PathVariable Long id) throws SQLException {
-        nhaCungCapRepo.deleteById(id);
+        nhaCungCapService.deleteById(id);
         return new ResponseEntity<>(new Message("xoa thanh cong"), HttpStatus.OK);
     }
     @PutMapping("")
     public ResponseEntity<Message>update(@RequestBody NCC ncc) throws SQLException {
-        nhaCungCapRepo.update(ncc);
+        nhaCungCapService.update(ncc);
         return new ResponseEntity<>(new Message("sua thanh cong"), HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<Message>create(@RequestBody  NCC ncc) throws SQLException {
-        nhaCungCapRepo.create(ncc);
+        nhaCungCapService.create(ncc);
         return new ResponseEntity<>(new Message("them thanh cong"), HttpStatus.OK);
     }
     @GetMapping("/getnhacungcap")
@@ -47,24 +48,12 @@ public class NCCController {
             @RequestParam(value = "diachi", required = false) String diachi,
             @RequestParam(value = "email",required = false) String email)
     {
-        System.out.println(ten);
-        System.out.println(diachi);
-        System.out.println(email);
-
-
-
-
         // Gọi hàm tìm kiếm sản phẩm
-        List<NCC> sanPhams =nhaCungCapRepo.timKiemNCCByFieldAndOrder(ten,diachi,email);
-
-
-
-        // Trả về view hiển thị danh sách sản phẩm
-        return sanPhams;
+        return nhaCungCapService.timKiemNCCByFieldAndOrder(ten, diachi, email);
     }
     @GetMapping("/nhacungcaporder/{id}")
     public ResponseEntity<List<NCC>>findById(@PathVariable String id) throws SQLException {
-        List<NCC> sp= nhaCungCapRepo.order(id);
+        List<NCC> sp= nhaCungCapService.order(id);
         return new ResponseEntity<>(sp,HttpStatus.OK);
     }
 }
