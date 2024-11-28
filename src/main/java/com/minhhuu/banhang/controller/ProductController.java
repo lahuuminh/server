@@ -18,7 +18,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired(required = true)
-    private ProductService productService
+    private ProductService productService;
     @GetMapping("/findAllProduct")
     public ResponseEntity<List<sanpham>> findAll() {
         List<sanpham> productList = productService.findAll();
